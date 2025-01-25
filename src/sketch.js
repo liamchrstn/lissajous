@@ -1,32 +1,31 @@
-// Get CSS variables for colors
+// Utility function to get CSS variables
 const getCSSVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 
-let w, h; // Width and height of each cell
-let angle = 0; // Current angle for animation
-const cols = 5; // Number of columns
-const rows = 5; // Array to store curve points
-const curves = [];
-let showGeneratorLines = false; // Changed default to false
-let speed = 0.03; // Add this line
-let isPaused = false; // Add this line
-let margin, r; // Add these global variables at the top with other declarations
+// Global variables
+let w, h;                     // Cell dimensions
+let angle = 0;               // Animation angle
+const cols = 5;              // Grid columns
+const rows = 5;              // Grid rows
+const curves = [];           // Store curve points
+let showGeneratorLines = false;
+let speed = 0.03;
+let isPaused = false;
+let margin, r;               // Canvas margin and circle radius
 
 function setup() {
-  // Create canvas that fits in the app div
+  // Setup canvas
   const appDiv = document.getElementById('app');
   const size = Math.min(appDiv.clientWidth, appDiv.clientHeight);
   const canvas = createCanvas(size, size);
   canvas.parent('app');
 
-  // Calculate cell size
+  // Initialize dimensions
   w = width / cols;
   h = height / rows;
-
-  // Add these calculations
   margin = width * 0.15;
   r = min(w, h) * 0.15;
 
-  // Initialize curves array
+  // Initialize curves grid
   for (let i = 0; i < cols; i++) {
     curves[i] = [];
     for (let j = 0; j < rows; j++) {
@@ -34,7 +33,7 @@ function setup() {
     }
   }
 
-  // Set drawing properties
+  // Initial drawing settings
   stroke(getCSSVar('--color-muted-purple'));
   noFill();
 }
@@ -147,8 +146,6 @@ function windowResized() {
   resizeCanvas(size, size);
   w = width / cols;
   h = height / rows;
-
-  // Add these calculations
   margin = width * 0.15;
   r = min(w, h) * 0.15;
 
@@ -160,33 +157,32 @@ function windowResized() {
   }
 }
 
-// Add this function
+// UI Control Functions
 window.toggleGeneratorLines = function() {
   showGeneratorLines = !showGeneratorLines;
   const button = document.getElementById('toggleLines');
-  if (showGeneratorLines) {
-    button.innerHTML = '<i class="nf nf-md-draw nf-oct-x"></i>';
-  } else {
-    button.innerHTML = '<i class="nf nf-md-draw"></i>';
-  }
+  button.innerHTML = showGeneratorLines ? 
+    '<i class="nf nf-md-draw nf-oct-x"></i>' : 
+    '<i class="nf nf-md-draw"></i>';
 }
 
-// Add this function
 window.updateSpeed = function(value) {
   speed = parseFloat(value);
 }
 
-// Add this function
 window.togglePause = function() {
   isPaused = !isPaused;
   const button = document.getElementById('pauseButton');
-  button.innerHTML = isPaused ? '<i class="nf nf-fa-play"></i>' : '<i class="nf nf-fa-pause"></i>';
+  button.innerHTML = isPaused ? 
+    '<i class="nf nf-fa-play"></i>' : 
+    '<i class="nf nf-fa-pause"></i>';
 
-  if (isPaused) {
-    // Fill each curve with 360 points for a full rotation
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        curves[i][j] = [];
+  // Handle curve points
+  for (let i = 0; i < cols; i++) {
+    for (let j = 0; j < rows; j++) {
+      curves[i][j] = [];
+      if (isPaused) {
+        // Generate full rotation points when paused
         for (let ang = 0; ang < TWO_PI; ang += TWO_PI / 360) {
           const x = margin + w * (i + 0.5) + cos((i + 1) * ang) * (r * 0.8);
           const y = margin + h * (j + 0.5) + sin((j + 1) * ang) * (r * 0.8);
@@ -194,17 +190,9 @@ window.togglePause = function() {
         }
       }
     }
-  } else {
-    // Clear curves when resuming
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        curves[i][j] = [];
-      }
-    }
   }
 }
 
-// Add at the end of the file
 window.toggleSettings = function() {
   const controls = document.querySelector('.controls');
   const settingsButton = document.getElementById('settingsButton');

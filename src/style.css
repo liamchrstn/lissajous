@@ -42,7 +42,7 @@ header p {
 .explanation {
   margin: 2vmax auto;
   padding: 1rem;
-  max-width: 100vmin;
+  max-width: 150vmin;
   font-size: 2vmax;
   line-height: 1.5em;
 }
