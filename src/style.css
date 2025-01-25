@@ -35,24 +35,25 @@ header p {
   margin: 0;
   color: var(--color-lavender);
   opacity: 0.9;
-  font-size: 3vw;
+  font-size: 3vmax;
 }
 
 .explanation {
   margin: 2vmax auto;
   padding: 1rem;
-  max-width: 80vw;
+  max-width: 70vw;
+  font-size: 2vmax;
+  line-height: 1.5em;
 }
 
 .explanation .intro {
-  font-size: 3vw;
-  line-height: 1.5;
-  color: var(--color-olive);
-  margin: 0 0 1rem 0;
+  color: var(--color-lavender);
+  margin: 0;
+  display: inline;
 }
 
 .explanation .intro a {
-  color: var(--color-muted-purple);
+  color: var(--color-olive);
   text-decoration: none;
   transition: opacity 0.2s ease;
 }
@@ -61,26 +62,6 @@ header p {
   opacity: 0.8;
 }
 
-.explanation .details {
-  color: var(--color-lavender);
-  font-size: 2.5vw;
-}
-
-.explanation .details p {
-  line-height: 1.5;
-  margin: 0.5rem 0;
-}
-
-.explanation ul {
-  margin: 0.5rem 0;
-  padding-left: 1.25rem;
-}
-
-.explanation li {
-  margin: 0.25rem 0;
-  line-height: 1.4;
-  font-size: 1.8vw;
-}
 
 #app {
   flex: 1;
