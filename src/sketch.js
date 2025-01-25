@@ -32,10 +32,6 @@ function setup() {
   // Set drawing properties
   stroke(getCSSVar('--color-muted-purple'));
   noFill();
-
-  // Update button text on initial load
-  const button = document.getElementById('toggleLines');
-  button.textContent = showGeneratorLines ? 'Hide Generator Lines' : 'Show Generator Lines';
 }
 
 function draw() {
@@ -169,13 +165,16 @@ function windowResized() {
 window.toggleGeneratorLines = function() {
   showGeneratorLines = !showGeneratorLines;
   const button = document.getElementById('toggleLines');
-  button.textContent = showGeneratorLines ? 'Hide Generator Lines' : 'Show Generator Lines';
+  if (showGeneratorLines) {
+    button.innerHTML = '<i class="nf nf-md-draw nf-oct-x"></i>';
+  } else {
+    button.innerHTML = '<i class="nf nf-md-draw"></i>';
+  }
 }
 
 // Add this function
 window.updateSpeed = function(value) {
   speed = parseFloat(value);
-  document.getElementById('speedValue').textContent = value;
 }
 
 // Add this function
