@@ -12,7 +12,8 @@ let speed = 0.03;
 let isPaused = false;
 let margin, r;               // Canvas margin and circle radius
 
-function setup() {
+// p5.js functions need to be global
+window.setup = function() {
   // Setup canvas
   const appDiv = document.getElementById('app');
   const size = Math.min(appDiv.clientWidth, appDiv.clientHeight);
@@ -38,7 +39,7 @@ function setup() {
   noFill();
 }
 
-function draw() {
+window.draw = function() {
   background(getCSSVar('--color-darker-gray'));
   
   // Arrays to store generator points
@@ -140,7 +141,7 @@ function draw() {
 }
 
 // Handle window resize
-function windowResized() {
+window.windowResized = function() {
   const appDiv = document.getElementById('app');
   const size = Math.min(appDiv.clientWidth, appDiv.clientHeight);
   resizeCanvas(size, size);
@@ -158,7 +159,7 @@ function windowResized() {
 }
 
 // UI Control Functions
-window.toggleGeneratorLines = function() {
+export function toggleGeneratorLines() {
   showGeneratorLines = !showGeneratorLines;
   const button = document.getElementById('toggleLines');
   button.innerHTML = showGeneratorLines ? 
@@ -166,11 +167,11 @@ window.toggleGeneratorLines = function() {
     '<i class="nf nf-md-draw"></i>';
 }
 
-window.updateSpeed = function(value) {
+export function updateSpeed(value) {
   speed = parseFloat(value);
 }
 
-window.togglePause = function() {
+export function togglePause() {
   isPaused = !isPaused;
   const button = document.getElementById('pauseButton');
   button.innerHTML = isPaused ? 
@@ -193,9 +194,15 @@ window.togglePause = function() {
   }
 }
 
-window.toggleSettings = function() {
+export function toggleSettings() {
   const controls = document.querySelector('.controls');
   const settingsButton = document.getElementById('settingsButton');
   controls.classList.toggle('visible');
   settingsButton.classList.toggle('active');
 }
+
+// Initialize by making functions globally available
+window.toggleGeneratorLines = toggleGeneratorLines;
+window.updateSpeed = updateSpeed;
+window.togglePause = togglePause;
+window.toggleSettings = toggleSettings;
