@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lissajous Curves</title>
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/main.css">
+    <link rel="stylesheet" href="/src/grid.css">
+    <link rel="stylesheet" href="/src/single.css">
   </head>
   <body>
     <header>
@@ -50,7 +52,7 @@
         <span class="variable">t</span> is time, and 
         <span class="variable">δ</span> sets phase difference.
       </p>
-      <button id="toggleSingleCurve" onclick="toggleSingleCurve()" data-tooltip="Toggle Example Curve">
+      <button id="toggleSingleCurve" type="button" data-tooltip="Toggle Example Curve">
         <i class="nf nf-oct-chevron_down"></i>
       </button>
     </section>
@@ -66,26 +68,9 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <script type="module" src="/src/InitialGrid.js"></script>
-    <script>
-      function toggleSingleCurve() {
-        const sections = document.querySelectorAll('.collapsible-section, #single-curve');
-        const button = document.getElementById('toggleSingleCurve');
-        const isCollapsed = sections[0].classList.contains('collapsed');
-        
-        sections.forEach(section => {
-          if (isCollapsed) {
-            section.classList.remove('collapsed');
-          } else {
-            section.classList.add('collapsed');
-          }
-        });
-        
-        if (isCollapsed) {
-          button.classList.add('active');
-        } else {
-          button.classList.remove('active');
-        }
-      }
+    <script type="module">
+      import { toggleSingleCurve } from '/src/util.js';
+      document.getElementById('toggleSingleCurve').onclick = toggleSingleCurve;
     </script>
     <script type="module" src="/src/2dsingle.js"></script>
     <footer>

@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+
+:root {
+  --color-dark-gray: #313131;
+  --color-darker-gray: #222222;
+  --color-olive: #BBBE64;
+  --color-lavender: #E9E6FF;
+  --color-muted-purple: #858AE3;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-darker-gray);
+  color: var(--color-lavender);
+  font-family: 'Arimo', system-ui, -apple-system, sans-serif;
+  font-size: 1.5vw;
+}
+
+header {
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  color: var(--color-olive);
+  margin: 0 0 2rem 0;
+  font-size: 10vw;
+  font-weight: 700;
+}
+
+header p {
+  margin: 0;
+  color: var(--color-lavender);
+  opacity: 0.9;
+  font-size: 3vmax;
+}
+
+.explanation {
+  margin: 2vmax auto;
+  max-width: 110vmin;
+  font-size: 2vmax;
+  line-height: 1.5em;
+  position: relative;
+  padding-bottom: 4vmax;
+}
+
+.explanation .intro {
+  color: var(--color-lavender);
+  margin: 0;
+  display: inline;
+}
+
+.explanation .intro a {
+  color: var(--color-olive);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.explanation .intro a:hover {
+  opacity: 0.8;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1.5vmax;
+}
+
+footer a {
+  color: var(--color-olive);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
