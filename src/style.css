@@ -302,19 +302,20 @@ speed-control input:hover::-moz-range-thumb {
   opacity: 0.9;
 }
 
-.single-curve-explanation {
-  text-align: center;
-  font-size: 1.8vmax;
-  margin-top: 2rem;
-  padding: 1rem;
-  border-top: 1px solid var(--color-muted-purple);
-  color: var(--color-lavender);
-  opacity: 0.9;
-}
+
 
 .equation-explanation .variable {
   color: var(--color-muted-purple);
   font-style: italic;
+}
+
+#single-curve {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 10vmin;
+  position: relative;
 }
 
 footer {
