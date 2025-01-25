@@ -2,15 +2,23 @@ const getCSSVar = (name) => getComputedStyle(document.documentElement).getProper
 
 let singleSketch = function(p) {
     let points = [];
-    let params = {
+    const defaultParams = {
         freqX: 3,
         freqY: 2,
         ampX: 1,
         ampY: 1,
-        phase: p.PI / 2
+        phase: p.PI / 2,
+        time: 0
     };
-    let isPlaying = false;
-    let currentTime = 0;
+    
+    let params = { ...defaultParams };
+    
+    const paramState = {
+        freqX: { playing: false, interval: null },
+        freqY: { playing: false, interval: null },
+        phase: { playing: false, interval: null },
+        time: { playing: false, interval: null }
+    };
 
     const generatePoints = () => {
         points = [];
@@ -21,16 +29,61 @@ let singleSketch = function(p) {
         }
     };
 
-    const updateTime = (time) => {
-        currentTime = time;
-        document.getElementById('time-value').textContent = currentTime.toFixed(2);
-        document.getElementById('timeSlider').value = currentTime;
+    const setupParamCycling = (paramId, paramName, step = 0.1) => {
+        if (paramId === 'ampX' || paramId === 'ampY') return; // Skip amplitude controls
+
+        const input = document.getElementById(paramId);
+        const btn = document.getElementById(`playPause${paramName}`);
+        const min = parseFloat(input.min);
+        const max = parseFloat(input.max);
+        
+        const updateValue = () => {
+            let value = parseFloat(input.value);
+            value = value + step;
+            if (value > max) value = min;
+            input.value = value.toFixed(2);
+            updateParams();
+        };
+
+        btn.addEventListener('click', () => {
+            const state = paramState[paramId];
+            state.playing = !state.playing;
+            btn.innerHTML = `<i class="nf nf-fa-${state.playing ? 'pause' : 'play'}"></i>`;
+            btn.classList.toggle('playing', state.playing);
+
+            if (state.playing) {
+                state.interval = setInterval(updateValue, 100);
+            } else {
+                clearInterval(state.interval);
+            }
+        });
     };
 
-    const togglePlayPause = () => {
-        isPlaying = !isPlaying;
-        const btn = document.getElementById('playPauseTime');
-        btn.innerHTML = `<i class="nf nf-fa-${isPlaying ? 'pause' : 'play'}"></i>`;
+    const resetParams = () => {
+        // Stop any playing animations
+        Object.keys(paramState).forEach(paramId => {
+            const state = paramState[paramId];
+            if (state.playing) {
+                clearInterval(state.interval);
+                state.playing = false;
+                const btn = document.getElementById(`playPause${paramId.charAt(0).toUpperCase() + paramId.slice(1)}`);
+                if (btn) {
+                    btn.innerHTML = '<i class="nf nf-fa-play"></i>';
+                    btn.classList.remove('playing');
+                }
+            }
+        });
+
+        // Reset values to defaults
+        params = { ...defaultParams };
+        document.getElementById('ampX').value = params.ampX;
+        document.getElementById('ampY').value = params.ampY;
+        document.getElementById('freqX').value = params.freqX;
+        document.getElementById('freqY').value = params.freqY;
+        document.getElementById('phase').value = params.phase / p.PI;
+        document.getElementById('time').value = params.time;
+
+        generatePoints();
     };
 
     const updateParams = () => {
@@ -39,17 +92,33 @@ let singleSketch = function(p) {
         params.freqX = parseFloat(document.getElementById('freqX').value);
         params.freqY = parseFloat(document.getElementById('freqY').value);
         params.phase = parseFloat(document.getElementById('phase').value) * p.PI;
+        params.time = parseFloat(document.getElementById('time').value);
         
         generatePoints();
     };
 
     const randomizeParams = () => {
+        // Stop any playing animations
+        Object.keys(paramState).forEach(paramId => {
+            const state = paramState[paramId];
+            if (state.playing) {
+                clearInterval(state.interval);
+                state.playing = false;
+                const btn = document.getElementById(`playPause${paramId.charAt(0).toUpperCase() + paramId.slice(1)}`);
+                if (btn) {
+                    btn.innerHTML = '<i class="nf nf-fa-play"></i>';
+                    btn.classList.remove('playing');
+                }
+            }
+        });
+
         // Generate random values within the input ranges
         params.ampX = parseFloat(p.random(0.1, 1).toFixed(1));
         params.ampY = parseFloat(p.random(0.1, 1).toFixed(1));
         params.freqX = parseFloat(p.random(1, 10).toFixed(1));
         params.freqY = parseFloat(p.random(1, 10).toFixed(1));
         params.phase = parseFloat((p.random(0, 2)).toFixed(1));
+        params.time = 0;
 
         // Update input values
         document.getElementById('ampX').value = params.ampX;
@@ -57,9 +126,9 @@ let singleSketch = function(p) {
         document.getElementById('freqX').value = params.freqX;
         document.getElementById('freqY').value = params.freqY;
         document.getElementById('phase').value = params.phase;
+        document.getElementById('time').value = params.time;
 
-        // Update display values and regenerate points
-        updateParams();
+        generatePoints();
     };
     
     p.setup = function() {
@@ -67,27 +136,23 @@ let singleSketch = function(p) {
         canvas.parent('single-curve');
         generatePoints();
         
-        // Add event listeners to sliders
-        ['ampX', 'ampY', 'freqX', 'freqY', 'phase'].forEach(id => {
+        // Setup cycling controls (excluding amplitudes)
+        setupParamCycling('freqX', 'FreqX');
+        setupParamCycling('freqY', 'FreqY');
+        setupParamCycling('phase', 'Phase');
+        setupParamCycling('time', 'Time', 0.01);
+
+        // Add input event listeners
+        ['ampX', 'ampY', 'freqX', 'freqY', 'phase', 'time'].forEach(id => {
             document.getElementById(id).addEventListener('input', updateParams);
         });
 
-        // Add randomize button listener
+        // Add button listeners
         document.getElementById('randomizeParams').addEventListener('click', randomizeParams);
-
-        // Add time control listeners
-        document.getElementById('playPauseTime').addEventListener('click', togglePlayPause);
-        document.getElementById('timeSlider').addEventListener('input', (e) => {
-            updateTime(parseFloat(e.target.value));
-        });
+        document.getElementById('resetParams').addEventListener('click', resetParams);
     };
     
     p.draw = function() {
-        if (isPlaying) {
-            currentTime = (currentTime + 0.01) % p.TWO_PI;
-            updateTime(currentTime);
-        }
-
         p.clear();
         p.translate(200, 200);
         
@@ -105,7 +170,7 @@ let singleSketch = function(p) {
         p.stroke(getCSSVar('--color-olive'));
         p.strokeWeight(2);
         p.beginShape();
-        for (let angle = 0; angle <= currentTime; angle += 0.01) {
+        for (let angle = 0; angle <= params.time; angle += 0.01) {
             const x = params.ampX * p.sin(params.freqX * angle + params.phase) * 170;
             const y = params.ampY * p.sin(params.freqY * angle) * 170;
             p.vertex(x, y);
@@ -113,8 +178,8 @@ let singleSketch = function(p) {
         p.endShape();
 
         // Draw current point
-        const x = params.ampX * p.sin(params.freqX * currentTime + params.phase) * 170;
-        const y = params.ampY * p.sin(params.freqY * currentTime) * 170;
+        const x = params.ampX * p.sin(params.freqX * params.time + params.phase) * 170;
+        const y = params.ampY * p.sin(params.freqY * params.time) * 170;
         p.fill(getCSSVar('--color-lavender'));
         p.noStroke();
         p.circle(x, y, 8);

@@ -135,12 +135,20 @@
   align-items: center;
   gap: 1vmax;
   flex: 1;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5vmax;
+  padding: 0.5vmax;
+}
+
+.input-group.with-play {
+  padding-right: 0.2vmax;
 }
 
 .input-group label {
   color: var(--color-lavender);
   font-size: 1.5vmax;
   min-width: 4vmax;
+  padding-left: 0.5vmax;
 }
 
 .input-group input[type="number"] {
@@ -164,21 +172,7 @@
   height: 2vmax;
 }
 
-.input-group.time-control {
-  display: flex;
-  align-items: center;
-  gap: 1vmax;
-  background: var(--color-bg-secondary);
-  border-radius: 0.5vmax;
-  padding: 0.5vmax;
-}
-
-.time-slider {
-  flex: 1;
-  min-width: 0;
-}
-
-.time-btn {
+.play-btn {
   font-size: 1.5vmax;
   color: var(--color-lavender);
   background: var(--color-muted-purple);
@@ -195,38 +189,27 @@
   min-width: 3vmax;
 }
 
-.time-btn:hover {
+.play-btn:hover {
   background: var(--color-olive);
   color: var(--color-bg);
 }
 
-.time-btn i {
+.play-btn i {
   transition: all 0.3s ease;
 }
 
-.time-slider input[type="range"] {
-  width: 100%;
-  height: 0.5vmax;
-  appearance: none;
-  background: var(--color-muted-purple);
-  border-radius: 0.25vmax;
-  cursor: pointer;
-}
-
-.time-slider input[type="range"]::-webkit-slider-thumb {
-  appearance: none;
-  width: 1.5vmax;
-  height: 1.5vmax;
+.play-btn.playing {
   background: var(--color-olive);
-  border-radius: 50%;
-  cursor: pointer;
+  color: var(--color-bg);
 }
 
-.time-slider label {
-  font-size: 1.2vmax;
+.button-row {
+  display: flex;
+  gap: 1vmax;
+  margin-bottom: 1.5vmax;
 }
 
-.randomize-btn {
+.action-btn {
   font-family: 'Arimo', system-ui, -apple-system, sans-serif;
   font-size: 1.5vmax;
   color: var(--color-lavender);
@@ -235,16 +218,19 @@
   border-radius: 0.5vmax;
   padding: 1vmax;
   cursor: pointer;
-  margin-bottom: 1vmax;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 0.5vmax;
   justify-content: center;
-  width: 100%;
+  flex: 1;
 }
 
-.randomize-btn:hover {
+.action-btn:hover {
   background: var(--color-olive);
   color: var(--color-bg);
+}
+
+.action-btn i {
+  font-size: 1.2vmax;
 }
