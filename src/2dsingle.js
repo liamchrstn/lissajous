@@ -2,6 +2,7 @@ const getCSSVar = (name) => getComputedStyle(document.documentElement).getProper
 
 let singleSketch = function(p) {
     let points = [];
+    let timeEnabled = true;
     const defaultParams = {
         freqX: 3,
         freqY: 2,
@@ -150,39 +151,48 @@ let singleSketch = function(p) {
         // Add button listeners
         document.getElementById('randomizeParams').addEventListener('click', randomizeParams);
         document.getElementById('resetParams').addEventListener('click', resetParams);
+        
+        // Add time toggle listener
+        document.getElementById('toggleTime').addEventListener('click', () => {
+            timeEnabled = !timeEnabled;
+            document.getElementById('toggleTime').classList.toggle('active', timeEnabled);
+        });
     };
     
     p.draw = function() {
         p.clear();
         p.translate(200, 200);
         
-        // Draw complete curve in muted purple
-        p.stroke(getCSSVar('--color-muted-purple'));
-        p.strokeWeight(1);
-        p.noFill();
-        p.beginShape();
-        for (let point of points) {
-            p.vertex(point.x * 170, point.y * 170);
-        }
-        p.endShape();
+        if (timeEnabled) {
+            // Draw partial curve up to current time in olive
+            p.noFill();
+            p.stroke(getCSSVar('--color-olive'));
+            p.strokeWeight(2);
+            p.beginShape();
+            for (let angle = 0; angle <= params.time; angle += 0.01) {
+                const x = params.ampX * p.sin(params.freqX * angle + params.phase) * 170;
+                const y = params.ampY * p.sin(params.freqY * angle) * 170;
+                p.vertex(x, y);
+            }
+            p.endShape();
 
-        // Draw partial curve up to current time in olive
-        p.stroke(getCSSVar('--color-olive'));
-        p.strokeWeight(2);
-        p.beginShape();
-        for (let angle = 0; angle <= params.time; angle += 0.01) {
-            const x = params.ampX * p.sin(params.freqX * angle + params.phase) * 170;
-            const y = params.ampY * p.sin(params.freqY * angle) * 170;
-            p.vertex(x, y);
+            // Draw current point
+            const x = params.ampX * p.sin(params.freqX * params.time + params.phase) * 170;
+            const y = params.ampY * p.sin(params.freqY * params.time) * 170;
+            p.fill(getCSSVar('--color-lavender'));
+            p.noStroke();
+            p.circle(x, y, 8);
+        } else {
+            // Draw complete curve in olive
+            p.stroke(getCSSVar('--color-olive'));
+            p.strokeWeight(2);
+            p.noFill();
+            p.beginShape();
+            for (let point of points) {
+                p.vertex(point.x * 170, point.y * 170);
+            }
+            p.endShape();
         }
-        p.endShape();
-
-        // Draw current point
-        const x = params.ampX * p.sin(params.freqX * params.time + params.phase) * 170;
-        const y = params.ampY * p.sin(params.freqY * params.time) * 170;
-        p.fill(getCSSVar('--color-lavender'));
-        p.noStroke();
-        p.circle(x, y, 8);
     };
 };
 
