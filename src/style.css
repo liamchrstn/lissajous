@@ -42,7 +42,7 @@ header p {
 .explanation {
   margin: 2vmax auto;
   padding: 1rem;
-  max-width: 150vmin;
+  max-width: 110vmin;
   font-size: 2vmax;
   line-height: 1.5em;
 }
@@ -281,6 +281,32 @@ speed-control input:hover::-moz-range-thumb {
   transform: translateY(0);
 }
 
+.equations {
+  margin: 2vmax auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.equations math {
+  font-size: 2.5vmax;
+  color: var(--color-muted-purple);
+}
+
+.equation-explanation {
+  text-align: center;
+  font-size: 1.8vmax;
+  margin-top: 1rem;
+  color: var(--color-lavender);
+  opacity: 0.9;
+}
+
+.equation-explanation .variable {
+  color: var(--color-muted-purple);
+  font-style: italic;
+}
+
 footer {
   position: relative;
   z-index: 1;
@@ -290,7 +316,7 @@ footer {
 
 footer p {
   margin: 0;
-  font-size: 1.5vw;
+  font-size: 1.5vmax;
 }
 
 footer a {

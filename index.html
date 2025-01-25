@@ -34,7 +34,22 @@
       </div>
     </div>
     <section class="explanation">
-      <p class="intro">A <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Lissajous curve</a> graphs the intersection of two perpendicular sinusoidal inputs.</p>
+      <p class="intro">A <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Lissajous curve</a> graphs the intersection of two perpendicular sinusoidal inputs.
+        The ratio of frequencies determines the curve's shape. Toggling the generator lines shows the individual sinusoidal inputs.</p>
+      <div class="equations">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>x</mi><mo>=</mo><mi>A</mi><mo>sin</mo><mo>(</mo><mi>a</mi><mi>t</mi><mo>+</mo><mi>δ</mi><mo>)</mo>
+        </math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>y</mi><mo>=</mo><mi>B</mi><mo>sin</mo><mo>(</mo><mi>b</mi><mi>t</mi><mo>)</mo>
+        </math>
+      </div>
+      <p class="equation-explanation">
+        where <span class="variable">A, B</span> control amplitude, 
+        <span class="variable">a, b</span> determine frequency ratio, 
+        <span class="variable">t</span> is time, and 
+        <span class="variable">δ</span> sets phase difference
+      </p>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <script src="/src/IntialGrid.js"></script>
