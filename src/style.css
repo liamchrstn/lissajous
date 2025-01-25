@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap');
+
+:root {
+  --color-dark-gray: #313131;
+  --color-darker-gray: #222222;
+  --color-olive: #BBBE64;
+  --color-lavender: #E9E6FF;
+  --color-muted-purple: #858AE3;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-darker-gray);
+  color: var(--color-lavender);
+  font-family: 'Arimo', system-ui, -apple-system, sans-serif;
+  font-size: 1.5vw;
+}
+
+header {
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  color: var(--color-olive);
+  margin: 0 0 0.25rem 0;
+  font-size: 8vw;
+}
+
+header p {
+  margin: 0;
+  color: var(--color-lavender);
+  opacity: 0.9;
+  font-size: 2vw;
+}
+
+.explanation {
+  margin: 1rem auto;
+  padding: 1rem;
+  max-width: 800px;
+}
+
+.explanation .intro {
+  font-size: 2.5vw;
+  line-height: 1.5;
+  color: var(--color-olive);
+  margin: 0 0 2rem 0;
+}
+
+.explanation .details {
+  color: var(--color-lavender);
+  font-size: 1.8vw;
+}
+
+.explanation .details p {
+  line-height: 1.5;
+  margin: 0.5rem 0;
+}
+
+.explanation ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+}
+
+.explanation li {
+  margin: 0.25rem 0;
+  line-height: 1.4;
+  font-size: 1.8vw;
+}
+
+#app {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  min-height: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+#app canvas {
+  max-height: 100%;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 1rem;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  font-size: 1.5vw;
+}
+
+footer a {
+  color: var(--color-olive);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
