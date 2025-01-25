@@ -37,11 +37,59 @@ function draw() {
   const margin = width * 0.15;
   const r = min(w, h) * 0.15;
 
+  // Arrays to store generator points
+  const horizontalPoints = [];
+  const verticalPoints = [];
+
+  // Draw generator circles
+  stroke(getCSSVar('--color-muted-purple'));
+  strokeWeight(1);
+  
+  // Draw horizontal generator circles
+  for (let i = 0; i < cols; i++) {
+    const centerX = margin + w * (i + 0.5);
+    const centerY = margin / 2;
+    
+    circle(centerX, centerY, r * 2);
+    
+    // Store points for later use
+    const pointX = centerX + cos(angle * (i + 1)) * r;
+    const pointY = centerY + sin(angle * (i + 1)) * r;
+    horizontalPoints[i] = { x: pointX, y: pointY };
+    
+    fill(getCSSVar('--color-olive'));
+    circle(pointX, pointY, 5);
+    noFill();
+  }
+
+  // Draw vertical generator circles
+  for (let j = 0; j < rows; j++) {
+    const centerX = margin / 2;
+    const centerY = margin + h * (j + 0.5);
+    
+    circle(centerX, centerY, r * 2);
+    
+    // Store points for later use
+    const pointX = centerX + cos(angle * (j + 1)) * r;
+    const pointY = centerY + sin(angle * (j + 1)) * r;
+    verticalPoints[j] = { x: pointX, y: pointY };
+    
+    fill(getCSSVar('--color-olive'));
+    circle(pointX, pointY, 5);
+    noFill();
+  }
+
   // Calculate and draw curves
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       const x = margin + w * (i + 0.5) + cos(angle * (i + 1)) * (r * 0.8);
       const y = margin + h * (j + 0.5) + sin(angle * (j + 1)) * (r * 0.8);
+      
+      // Draw guide lines from generators using stored points
+      stroke(getCSSVar('--color-muted-purple'));
+      strokeWeight(0.5);
+      line(horizontalPoints[i].x, horizontalPoints[i].y, x, y);
+      line(verticalPoints[j].x, verticalPoints[j].y, x, y);
       
       curves[i][j].push(createVector(x, y));
       
