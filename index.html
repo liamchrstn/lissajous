@@ -38,32 +38,62 @@
     <section class="explanation">
       <p class="intro">A <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Lissajous curve</a> graphs the intersection of two perpendicular sinusoidal inputs.
         The ratio of frequencies determines the curve's shape. Toggling the generator lines shows the individual sinusoidal inputs.</p>
-      <div class="equations">
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>x</mi><mo>=</mo><mi>A</mi><mo>sin</mo><mo>(</mo><mi>a</mi><mi>t</mi><mo>+</mo><mi>δ</mi><mo>)</mo>
-        </math>
-        <math xmlns="http://www.w3.org/1998/Math/MathML">
-          <mi>y</mi><mo>=</mo><mi>B</mi><mo>sin</mo><mo>(</mo><mi>b</mi><mi>t</mi><mo>)</mo>
-        </math>
-      </div>
-      <p class="equation-explanation">
-        where <span class="variable">A, B</span> control amplitude, 
-        <span class="variable">a, b</span> determine frequency ratio, 
-        <span class="variable">t</span> is time, and 
-        <span class="variable">δ</span> sets phase difference.
-      </p>
       <button id="toggleSingleCurve" type="button" data-tooltip="Toggle Example Curve">
         <i class="nf nf-oct-chevron_down"></i>
       </button>
     </section>
     <div id="curve-section">
       <div class="collapsible-section collapsed">
-        <p>The curve below demonstrates a basic Lissajous figure with a frequency ratio of 2:1, creating a figure-eight pattern. The phase difference (δ) is set to π/2 radians.</p>
+        <div class="equations">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <mi>x</mi><mo>=</mo><mi>A</mi><mo>sin</mo><mo>(</mo><mi>a</mi><mi>t</mi><mo>+</mo><mi>δ</mi><mo>)</mo>
+          </math>
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <mi>y</mi><mo>=</mo><mi>B</mi><mo>sin</mo><mo>(</mo><mi>b</mi><mi>t</mi><mo>)</mo>
+          </math>
+        </div>
+        <p class="equation-explanation">
+          where <span class="variable">A, B</span> control amplitude, 
+          <span class="variable">a, b</span> determine frequency ratio, 
+          <span class="variable">t</span> is time, and 
+          <span class="variable">δ</span> sets phase difference.
+        </p>
+        <div class="slider-controls">
+          <div class="time-control">
+            <button id="playPauseTime" class="time-btn">
+              <i class="nf nf-fa-play"></i>
+            </button>
+            <div class="slider-group time-slider">
+              <label>Time: <span id="time-value">0.00</span></label>
+              <input type="range" id="timeSlider" min="0" max="6.28" value="0" step="0.01">
+            </div>
+          </div>
+          <button id="randomizeParams" class="randomize-btn">
+            <i class="nf nf-fa-random"></i> Randomize
+          </button>
+          <div class="slider-group">
+            <label>Amplitude X: <span id="ampX-value">1.0</span></label>
+            <input type="range" id="ampX" min="0.1" max="1" value="1" step="0.1">
+          </div>
+          <div class="slider-group">
+            <label>Amplitude Y: <span id="ampY-value">1.0</span></label>
+            <input type="range" id="ampY" min="0.1" max="1" value="1" step="0.1">
+          </div>
+          <div class="slider-group">
+            <label>Frequency X: <span id="freqX-value">3</span></label>
+            <input type="range" id="freqX" min="1" max="10" value="3" step="0.1">
+          </div>
+          <div class="slider-group">
+            <label>Frequency Y: <span id="freqY-value">2</span></label>
+            <input type="range" id="freqY" min="1" max="10" value="2" step="0.1">
+          </div>
+          <div class="slider-group">
+            <label>Phase (π rad): <span id="phase-value">0.5</span></label>
+            <input type="range" id="phase" min="0" max="2" value="0.5" step="0.1">
+          </div>
+        </div>
       </div>
       <div id="single-curve" class="collapsed active">
-      </div>
-      <div class="collapsible-section collapsed">
-        <p>Notice how the curve traces a path determined by the relative frequencies of the horizontal and vertical oscillations. Try adjusting the drawing speed to see the pattern emerge more clearly.</p>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>

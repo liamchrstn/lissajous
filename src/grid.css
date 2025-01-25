@@ -206,27 +206,4 @@ speed-control input:hover::-moz-range-thumb {
   transform: translateY(0);
 }
 
-.equations {
-  margin: 2vmax auto;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-}
 
-.equations math {
-  font-size: 2.5vmax;
-  color: var(--color-muted-purple);
-}
-
-.equation-explanation {
-  text-align: center;
-  font-size: 1.8vmax;
-  color: var(--color-lavender);
-  opacity: 0.9;
-}
-
-.equation-explanation .variable {
-  color: var(--color-muted-purple);
-  font-style: italic;
-}
