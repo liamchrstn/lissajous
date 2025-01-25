@@ -181,7 +181,7 @@ window.updateSpeed = function(value) {
 window.togglePause = function() {
   isPaused = !isPaused;
   const button = document.getElementById('pauseButton');
-  button.innerHTML = isPaused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+  button.innerHTML = isPaused ? '<i class="nf nf-fa-play"></i>' : '<i class="nf nf-fa-pause"></i>';
   
   if (!isPaused) {
     // Clear curves when resuming
