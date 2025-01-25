@@ -88,17 +88,13 @@ function draw() {
 
   // Calculate and draw curves
   for (let i = 0; i < cols; i++) {
+    // Calculate last row position for horizontal generator line
+    const lastRowX = margin + w * (i + 0.5) + cos(angle * (i + 1)) * (r * 0.8);
+    const lastRowY = margin + h * (rows - 0.5) + sin(angle * (rows)) * (r * 0.8);
+    
     for (let j = 0; j < rows; j++) {
       const x = margin + w * (i + 0.5) + cos(angle * (i + 1)) * (r * 0.8);
       const y = margin + h * (j + 0.5) + sin(angle * (j + 1)) * (r * 0.8);
-      
-      // Draw guide lines from generators using stored points
-      if (showGeneratorLines) {
-        stroke(getCSSVar('--color-muted-purple'));
-        strokeWeight(0.5);
-        line(horizontalPoints[i].x, horizontalPoints[i].y, x, y);
-        line(verticalPoints[j].x, verticalPoints[j].y, x, y);
-      }
       
       if (!isPaused) {
         curves[i][j].push(createVector(x, y));
@@ -114,7 +110,7 @@ function draw() {
         }
       }
       
-      // Draw curve with fade effect
+      // Draw curves with fade effect
       noFill();
       for (let k = 0; k < curves[i][j].length - 1; k++) {
         const alpha = map(k, 0, curves[i][j].length - 1, 0, 255);
@@ -128,9 +124,29 @@ function draw() {
         );
       }
     }
+    
+    // Draw averaged horizontal generator line extending to last row
+    if (showGeneratorLines) {
+      stroke(getCSSVar('--color-muted-purple'));
+      strokeWeight(0.5);
+      line(horizontalPoints[i].x, horizontalPoints[i].y, lastRowX, lastRowY);
+    }
   }
 
-  angle += isPaused ? 0 : speed; // Modified this line
+  // Draw averaged vertical generator lines
+  if (showGeneratorLines) {
+    for (let j = 0; j < rows; j++) {
+      // Calculate last column position for vertical generator line
+      const lastColX = margin + w * (cols - 0.5) + cos(angle * cols) * (r * 0.8);
+      const lastColY = margin + h * (j + 0.5) + sin(angle * (j + 1)) * (r * 0.8);
+      
+      stroke(getCSSVar('--color-muted-purple'));
+      strokeWeight(2);
+      line(verticalPoints[j].x, verticalPoints[j].y, lastColX, lastColY);
+    }
+  }
+
+  angle += isPaused ? 0 : speed;
 }
 
 // Handle window resize
