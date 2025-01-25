@@ -3,6 +3,14 @@ const getCSSVar = (name) => getComputedStyle(document.documentElement).getProper
 let singleSketch = function(p) {
     let points = [];
     let timeEnabled = true;
+    const lockedParams = {
+        ampX: false,
+        ampY: false,
+        freqX: false,
+        freqY: false,
+        phase: false
+    };
+    
     const defaultParams = {
         freqX: 3,
         freqY: 2,
@@ -75,8 +83,14 @@ let singleSketch = function(p) {
             }
         });
 
-        // Reset values to defaults
-        params = { ...defaultParams };
+        // Reset values to defaults (except locked params)
+        Object.keys(defaultParams).forEach(key => {
+            if (!lockedParams[key]) {
+                params[key] = defaultParams[key];
+            }
+        });
+
+        // Update input values
         document.getElementById('ampX').value = params.ampX;
         document.getElementById('ampY').value = params.ampY;
         document.getElementById('freqX').value = params.freqX;
@@ -113,12 +127,12 @@ let singleSketch = function(p) {
             }
         });
 
-        // Generate random values within the input ranges
-        params.ampX = parseFloat(p.random(0.1, 1).toFixed(1));
-        params.ampY = parseFloat(p.random(0.1, 1).toFixed(1));
-        params.freqX = parseFloat(p.random(1, 10).toFixed(1));
-        params.freqY = parseFloat(p.random(1, 10).toFixed(1));
-        params.phase = parseFloat((p.random(0, 2)).toFixed(1));
+        // Generate random values for unlocked parameters
+        if (!lockedParams.ampX) params.ampX = parseFloat(p.random(0.1, 1).toFixed(1));
+        if (!lockedParams.ampY) params.ampY = parseFloat(p.random(0.1, 1).toFixed(1));
+        if (!lockedParams.freqX) params.freqX = parseFloat(p.random(1, 10).toFixed(1));
+        if (!lockedParams.freqY) params.freqY = parseFloat(p.random(1, 10).toFixed(1));
+        if (!lockedParams.phase) params.phase = parseFloat((p.random(0, 2)).toFixed(1));
         params.time = 0;
 
         // Update input values
@@ -141,7 +155,7 @@ let singleSketch = function(p) {
         setupParamCycling('freqX', 'FreqX');
         setupParamCycling('freqY', 'FreqY');
         setupParamCycling('phase', 'Phase');
-        setupParamCycling('time', 'Time', 0.01);
+        setupParamCycling('time', 'Time', 0.05);
 
         // Add input event listeners
         ['ampX', 'ampY', 'freqX', 'freqY', 'phase', 'time'].forEach(id => {
@@ -151,11 +165,22 @@ let singleSketch = function(p) {
         // Add button listeners
         document.getElementById('randomizeParams').addEventListener('click', randomizeParams);
         document.getElementById('resetParams').addEventListener('click', resetParams);
+
+        // Add lock button listeners
+        Object.keys(lockedParams).forEach(paramId => {
+            document.getElementById(`lock${paramId.charAt(0).toUpperCase() + paramId.slice(1)}`).addEventListener('click', (e) => {
+                lockedParams[paramId] = !lockedParams[paramId];
+                e.currentTarget.classList.toggle('locked');
+                e.currentTarget.querySelector('i').classList.toggle('nf-fa-unlock');
+                e.currentTarget.querySelector('i').classList.toggle('nf-fa-lock');
+            });
+        });
         
         // Add time toggle listener
         document.getElementById('toggleTime').addEventListener('click', () => {
             timeEnabled = !timeEnabled;
             document.getElementById('toggleTime').classList.toggle('active', timeEnabled);
+            document.querySelector('.input-group.with-play:has(#time)').classList.toggle('time-disabled', !timeEnabled);
         });
     };
     
