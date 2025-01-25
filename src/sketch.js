@@ -9,6 +9,7 @@ const curves = [];
 let showGeneratorLines = false; // Changed default to false
 let speed = 0.03; // Add this line
 let isPaused = false; // Add this line
+let margin, r; // Add these global variables at the top with other declarations
 
 function setup() {
   // Create canvas that fits in the app div
@@ -20,6 +21,10 @@ function setup() {
   // Calculate cell size
   w = width / cols;
   h = height / rows;
+
+  // Add these calculations
+  margin = width * 0.15;
+  r = min(w, h) * 0.15;
 
   // Initialize curves array
   for (let i = 0; i < cols; i++) {
@@ -37,9 +42,6 @@ function setup() {
 function draw() {
   background(getCSSVar('--color-darker-gray'));
   
-  const margin = width * 0.15;
-  const r = min(w, h) * 0.15;
-
   // Arrays to store generator points
   const horizontalPoints = [];
   const verticalPoints = [];
@@ -97,13 +99,6 @@ function draw() {
         if (curves[i][j].length > 100) {
           curves[i][j].shift();
         }
-      } else if (curves[i][j].length !== 360) {
-        curves[i][j] = [];
-        for (let angle = 0; angle < TWO_PI; angle += TWO_PI/360) {
-          const x = margin + w * (i + 0.5) + cos((i + 1) * angle) * (r * 0.8);
-          const y = margin + h * (j + 0.5) + sin((j + 1) * angle) * (r * 0.8);
-          curves[i][j].push(createVector(x, y));
-        }
       }
       
       // Draw curves with fade effect
@@ -153,6 +148,10 @@ function windowResized() {
   w = width / cols;
   h = height / rows;
 
+  // Add these calculations
+  margin = width * 0.15;
+  r = min(w, h) * 0.15;
+
   // Clear curves when resizing
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
@@ -182,8 +181,20 @@ window.togglePause = function() {
   isPaused = !isPaused;
   const button = document.getElementById('pauseButton');
   button.innerHTML = isPaused ? '<i class="nf nf-fa-play"></i>' : '<i class="nf nf-fa-pause"></i>';
-  
-  if (!isPaused) {
+
+  if (isPaused) {
+    // Fill each curve with 360 points for a full rotation
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        curves[i][j] = [];
+        for (let ang = 0; ang < TWO_PI; ang += TWO_PI / 360) {
+          const x = margin + w * (i + 0.5) + cos((i + 1) * ang) * (r * 0.8);
+          const y = margin + h * (j + 0.5) + sin((j + 1) * ang) * (r * 0.8);
+          curves[i][j].push(createVector(x, y));
+        }
+      }
+    }
+  } else {
     // Clear curves when resuming
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {

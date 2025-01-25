@@ -109,7 +109,7 @@ header p {
   margin: 0;
   padding: 0.5rem 1rem;
   font-family: 'Arimo', system-ui, -apple-system, sans-serif;
-  font-size: 3vmin;
+  font-size: 3vmax;
   background: none;
   color: var(--color-muted-purple);
   border: none;
@@ -156,13 +156,13 @@ header p {
 
 .speed-control .nf {
   color: var(--color-muted-purple);
-  font-size: 3vmin;
+  font-size: 3vmax;
 }
 
 .speed-control label,
 .speed-control #speedValue {
   color: var(--color-lavender);
-  font-size: 3vmin;
+  font-size: 3vmax;
 }
 
 .speed-control input {
@@ -226,7 +226,7 @@ speed-control input:hover::-moz-range-thumb {
   margin: 0;
   padding: 0.5rem 1rem;
   font-family: 'Arimo', system-ui, -apple-system, sans-serif;
-  font-size: 3vmin;
+  font-size: 3vmax;
   background: none;
   color: var(--color-muted-purple);
   border: none;
@@ -241,31 +241,47 @@ speed-control input:hover::-moz-range-thumb {
   opacity: 1;
 }
 
-/* Replace existing tooltip styles with these */
+/* Replace existing tooltip styles with these updated ones */
 [data-tooltip] {
   position: relative;
 }
 
-[data-tooltip]:hover::after {
+[data-tooltip]::after {
   content: attr(data-tooltip);
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 0.5rem;
   background: var(--color-dark-gray);
   color: var(--color-lavender);
-  font-size: 1.5vmin;
-  font-family: 'Arimo', system-ui, -apple-system, sans-serif; /* Add this line */
+  font-size: 2vmin;
+  font-family: 'Arimo', system-ui, -apple-system, sans-serif;
   white-space: nowrap;
   border-radius: 4px;
   pointer-events: none;
   z-index: 100;
+  margin-left: 10px;
+  
+  /* Hide by default */
+  opacity: 0;
+  visibility: hidden;
+  
+  /* Add transition for smooth appearance */
+  transition: opacity 0.2s ease, visibility 0.2s ease;
 }
 
-/* Fix tooltip position for range input */
-.speed-control input[data-tooltip]:hover::after {
-  bottom: 150%;
+/* Show tooltip after hover with delay */
+[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.5s; /* Add 500ms delay before showing */
+}
+
+/* Adjust position for range input tooltip */
+.speed-control input[data-tooltip]::after {
+  top: 0;
+  transform: translateY(0);
 }
 
 footer {
