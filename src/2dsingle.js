@@ -9,7 +9,7 @@ let singleSketch = function(p) {
     
     p.setup = function() {
         const appDiv = document.getElementById('app');
-        size = Math.min(appDiv.clientWidth, appDiv.clientHeight) * 0.2; // 20% of app size
+        size = Math.min(appDiv.clientWidth, appDiv.clientHeight);
         const canvas = p.createCanvas(size, size);
         canvas.parent('single-curve');
         
@@ -22,11 +22,11 @@ let singleSketch = function(p) {
     };
     
     p.draw = function() {
-        p.background(getCSSVar('--color-darker-gray'));
+        p.clear(); // Makes background transparent
         p.translate(size/2, size/2);  // Center the curve
         
-        // Scale to fit the canvas with padding
-        const scale = size * 0.4;
+        // Scale to fit the canvas
+        const scale = size * 0.25;
         
         p.stroke(getCSSVar('--color-olive'));
         p.strokeWeight(2);
