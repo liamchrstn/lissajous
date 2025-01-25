@@ -54,19 +54,37 @@
         <i class="nf nf-oct-chevron_down"></i>
       </button>
     </section>
-    <div id="single-curve">
-
-
-
+    <div id="curve-section">
+      <div class="collapsible-section collapsed">
+        <p>The curve below demonstrates a basic Lissajous figure with a frequency ratio of 2:1, creating a figure-eight pattern. The phase difference (δ) is set to π/2 radians.</p>
+      </div>
+      <div id="single-curve" class="collapsed active">
+      </div>
+      <div class="collapsible-section collapsed">
+        <p>Notice how the curve traces a path determined by the relative frequencies of the horizontal and vertical oscillations. Try adjusting the drawing speed to see the pattern emerge more clearly.</p>
+      </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <script type="module" src="/src/InitialGrid.js"></script>
     <script>
       function toggleSingleCurve() {
-        const curve = document.getElementById('single-curve');
+        const sections = document.querySelectorAll('.collapsible-section, #single-curve');
         const button = document.getElementById('toggleSingleCurve');
-        curve.classList.toggle('collapsed');
-        button.classList.toggle('active');
+        const isCollapsed = sections[0].classList.contains('collapsed');
+        
+        sections.forEach(section => {
+          if (isCollapsed) {
+            section.classList.remove('collapsed');
+          } else {
+            section.classList.add('collapsed');
+          }
+        });
+        
+        if (isCollapsed) {
+          button.classList.add('active');
+        } else {
+          button.classList.remove('active');
+        }
       }
     </script>
     <script type="module" src="/src/2dsingle.js"></script>
