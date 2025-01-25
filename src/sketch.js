@@ -193,3 +193,11 @@ window.togglePause = function() {
     }
   }
 }
+
+// Add at the end of the file
+window.toggleSettings = function() {
+  const controls = document.querySelector('.controls');
+  const settingsButton = document.getElementById('settingsButton');
+  controls.classList.toggle('visible');
+  settingsButton.classList.toggle('active');
+}

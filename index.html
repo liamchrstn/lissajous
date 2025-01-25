@@ -13,22 +13,28 @@
       <p>An interactive experiment of harmonic motion</p>
     </header>
     <div id="app"></div>
-    <div class="controls">
-      <button id="toggleLines" onclick="toggleGeneratorLines()">Show Generator Lines</button>
-      <button id="pauseButton" onclick="togglePause()"><i class="fas fa-pause"></i></button>
-      <div class="speed-control">
-        <label for="speed">Speed: <span id="speedValue">0.03</span></label>
-        <input type="range" id="speed" name="speed" 
-               min="0.01" max="0.1" value="0.03" step="0.01"
-               oninput="updateSpeed(this.value)">
+    <div class="controls-container">
+      <button id="settingsButton" onclick="toggleSettings()">
+        <i class="fas fa-cog"></i>
+      </button>
+      <div class="controls">
+        <button id="toggleLines" onclick="toggleGeneratorLines()">Show Generator Lines</button>
+        <button id="pauseButton" onclick="togglePause()"><i class="fas fa-pause"></i></button>
+        <div class="speed-control">
+          <label for="speed">Speed:</label>
+          <input type="range" id="speed" name="speed" 
+                 min="0.01" max="0.1" value="0.03" step="0.01"
+                 oninput="updateSpeed(this.value)">
+          <span id="speedValue">0.03</span>
+        </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
-    <script src="/src/sketch.js"></script>
     <section class="explanation">
       <p class="intro">A <a href="https://en.wikipedia.org/wiki/Lissajous_curve">Lissajous curve</a> shows patterns created by two perpendicular harmonic motions.
         This project focuses on visualising these curves, hopefully creating something both interesting and visually pleasing.</p>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="/src/sketch.js"></script>
     <footer>
       <p><a href="https://liamchristian.com">LiamC</a></p>
     </footer>
