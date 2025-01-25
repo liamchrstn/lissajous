@@ -59,37 +59,43 @@
           <span class="variable">δ</span> sets phase difference.
         </p>
         <div class="slider-controls">
-          <div class="time-control">
-            <button id="playPauseTime" class="time-btn">
-              <i class="nf nf-fa-play"></i>
-            </button>
-            <div class="slider-group time-slider">
-              <label>Time: <span id="time-value">0.00</span></label>
-              <input type="range" id="timeSlider" min="0" max="6.28" value="0" step="0.01">
-            </div>
-          </div>
           <button id="randomizeParams" class="randomize-btn">
             <i class="nf nf-fa-random"></i> Randomize
           </button>
-          <div class="slider-group">
-            <label>Amplitude X: <span id="ampX-value">1.0</span></label>
-            <input type="range" id="ampX" min="0.1" max="1" value="1" step="0.1">
+          <div class="controls-row">
+            <div class="input-group">
+              <label>A:</label>
+              <input type="number" id="ampX" min="0.1" max="1" value="1" step="0.1">
+            </div>
+            <div class="input-group">
+              <label>B:</label>
+              <input type="number" id="ampY" min="0.1" max="1" value="1" step="0.1">
+            </div>
           </div>
-          <div class="slider-group">
-            <label>Amplitude Y: <span id="ampY-value">1.0</span></label>
-            <input type="range" id="ampY" min="0.1" max="1" value="1" step="0.1">
+          <div class="controls-row">
+            <div class="input-group">
+              <label>a:</label>
+              <input type="number" id="freqX" min="1" max="10" value="3" step="0.1">
+            </div>
+            <div class="input-group">
+              <label>b:</label>
+              <input type="number" id="freqY" min="1" max="10" value="2" step="0.1">
+            </div>
           </div>
-          <div class="slider-group">
-            <label>Frequency X: <span id="freqX-value">3</span></label>
-            <input type="range" id="freqX" min="1" max="10" value="3" step="0.1">
-          </div>
-          <div class="slider-group">
-            <label>Frequency Y: <span id="freqY-value">2</span></label>
-            <input type="range" id="freqY" min="1" max="10" value="2" step="0.1">
-          </div>
-          <div class="slider-group">
-            <label>Phase (π rad): <span id="phase-value">0.5</span></label>
-            <input type="range" id="phase" min="0" max="2" value="0.5" step="0.1">
+          <div class="controls-row">
+            <div class="input-group">
+              <label>δ (π rad):</label>
+              <input type="number" id="phase" min="0" max="2" value="0.5" step="0.1">
+            </div>
+            <div class="input-group time-control">
+              <button id="playPauseTime" class="time-btn">
+                <i class="nf nf-fa-play"></i>
+              </button>
+              <div class="slider-group time-slider">
+                <label>t: <span id="time-value">0.00</span></label>
+                <input type="range" id="timeSlider" min="0" max="6.28" value="0" step="0.01">
+              </div>
+            </div>
           </div>
         </div>
       </div>

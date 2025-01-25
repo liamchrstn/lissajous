@@ -123,18 +123,88 @@
   padding: 2vmax;
 }
 
-.slider-group {
+.controls-row {
   display: flex;
-  flex-direction: column;
-  gap: 0.5vmax;
+  justify-content: space-between;
+  gap: 2vmax;
+  width: 100%;
 }
 
-.slider-group label {
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 1vmax;
+  flex: 1;
+}
+
+.input-group label {
   color: var(--color-lavender);
   font-size: 1.5vmax;
+  min-width: 4vmax;
 }
 
-.slider-group input[type="range"] {
+.input-group input[type="number"] {
+  width: 8vmax;
+  padding: 0.5vmax;
+  font-size: 1.5vmax;
+  color: var(--color-lavender);
+  background: var(--color-bg-secondary);
+  border: 2px solid var(--color-muted-purple);
+  border-radius: 0.5vmax;
+  outline: none;
+}
+
+.input-group input[type="number"]:focus {
+  border-color: var(--color-olive);
+}
+
+.input-group input[type="number"]::-webkit-inner-spin-button,
+.input-group input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 2vmax;
+}
+
+.input-group.time-control {
+  display: flex;
+  align-items: center;
+  gap: 1vmax;
+  background: var(--color-bg-secondary);
+  border-radius: 0.5vmax;
+  padding: 0.5vmax;
+}
+
+.time-slider {
+  flex: 1;
+  min-width: 0;
+}
+
+.time-btn {
+  font-size: 1.5vmax;
+  color: var(--color-lavender);
+  background: var(--color-muted-purple);
+  border: none;
+  border-radius: 0.5vmax;
+  padding: 0.8vmax;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3vmax;
+  height: 3vmax;
+  min-width: 3vmax;
+}
+
+.time-btn:hover {
+  background: var(--color-olive);
+  color: var(--color-bg);
+}
+
+.time-btn i {
+  transition: all 0.3s ease;
+}
+
+.time-slider input[type="range"] {
   width: 100%;
   height: 0.5vmax;
   appearance: none;
@@ -143,13 +213,17 @@
   cursor: pointer;
 }
 
-.slider-group input[type="range"]::-webkit-slider-thumb {
+.time-slider input[type="range"]::-webkit-slider-thumb {
   appearance: none;
-  width: 2vmax;
-  height: 2vmax;
+  width: 1.5vmax;
+  height: 1.5vmax;
   background: var(--color-olive);
   border-radius: 50%;
   cursor: pointer;
+}
+
+.time-slider label {
+  font-size: 1.2vmax;
 }
 
 .randomize-btn {
@@ -173,43 +247,4 @@
 .randomize-btn:hover {
   background: var(--color-olive);
   color: var(--color-bg);
-}
-
-.time-control {
-  display: flex;
-  gap: 1vmax;
-  align-items: center;
-  margin-bottom: 1vmax;
-  padding: 1vmax;
-  background: var(--color-bg-secondary);
-  border-radius: 0.5vmax;
-}
-
-.time-btn {
-  font-size: 1.5vmax;
-  color: var(--color-lavender);
-  background: var(--color-muted-purple);
-  border: none;
-  border-radius: 0.5vmax;
-  padding: 1vmax;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3vmax;
-  height: 3vmax;
-}
-
-.time-btn:hover {
-  background: var(--color-olive);
-  color: var(--color-bg);
-}
-
-.time-btn i {
-  transition: all 0.3s ease;
-}
-
-.time-slider {
-  flex: 1;
 }

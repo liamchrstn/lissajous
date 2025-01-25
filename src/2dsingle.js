@@ -40,30 +40,23 @@ let singleSketch = function(p) {
         params.freqY = parseFloat(document.getElementById('freqY').value);
         params.phase = parseFloat(document.getElementById('phase').value) * p.PI;
         
-        // Update display values
-        document.getElementById('ampX-value').textContent = params.ampX.toFixed(1);
-        document.getElementById('ampY-value').textContent = params.ampY.toFixed(1);
-        document.getElementById('freqX-value').textContent = params.freqX.toFixed(1);
-        document.getElementById('freqY-value').textContent = params.freqY.toFixed(1);
-        document.getElementById('phase-value').textContent = (params.phase / p.PI).toFixed(1);
-        
         generatePoints();
     };
 
     const randomizeParams = () => {
-        // Generate random values within the slider ranges
-        params.ampX = p.random(0.1, 1);
-        params.ampY = p.random(0.1, 1);
-        params.freqX = p.random(1, 10);  // Updated range
-        params.freqY = p.random(1, 10);  // Updated range
-        params.phase = p.random(0, 2) * p.PI;
+        // Generate random values within the input ranges
+        params.ampX = parseFloat(p.random(0.1, 1).toFixed(1));
+        params.ampY = parseFloat(p.random(0.1, 1).toFixed(1));
+        params.freqX = parseFloat(p.random(1, 10).toFixed(1));
+        params.freqY = parseFloat(p.random(1, 10).toFixed(1));
+        params.phase = parseFloat((p.random(0, 2)).toFixed(1));
 
-        // Update slider values
+        // Update input values
         document.getElementById('ampX').value = params.ampX;
         document.getElementById('ampY').value = params.ampY;
         document.getElementById('freqX').value = params.freqX;
         document.getElementById('freqY').value = params.freqY;
-        document.getElementById('phase').value = params.phase / p.PI;
+        document.getElementById('phase').value = params.phase;
 
         // Update display values and regenerate points
         updateParams();
