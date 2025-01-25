@@ -50,6 +50,9 @@
         <span class="variable">t</span> is time, and 
         <span class="variable">δ</span> sets phase difference.
       </p>
+      <button id="toggleSingleCurve" onclick="toggleSingleCurve()" data-tooltip="Toggle Example Curve">
+        <i class="nf nf-oct-chevron_down"></i>
+      </button>
     </section>
     <div id="single-curve">
 
@@ -58,6 +61,14 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <script type="module" src="/src/InitialGrid.js"></script>
+    <script>
+      function toggleSingleCurve() {
+        const curve = document.getElementById('single-curve');
+        const button = document.getElementById('toggleSingleCurve');
+        curve.classList.toggle('collapsed');
+        button.classList.toggle('active');
+      }
+    </script>
     <script type="module" src="/src/2dsingle.js"></script>
     <footer>
       <p><a href="https://liamchristian.com">LiamC</a></p>
