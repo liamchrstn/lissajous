@@ -222,7 +222,6 @@ speed-control input:hover::-moz-range-thumb {
 .equation-explanation {
   text-align: center;
   font-size: 1.8vmax;
-  margin-top: 1rem;
   color: var(--color-lavender);
   opacity: 0.9;
 }
