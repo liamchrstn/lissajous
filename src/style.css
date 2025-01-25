@@ -131,6 +131,15 @@ header p {
 #settingsButton.active {
   left: 2vw;
   transform: translateY(-50%) rotate(90deg);
+  color: var(--color-olive);
+}
+
+#settingsButton:hover {
+  color: var(--color-olive);
+}
+
+#settingsButton.active:hover {
+  color: var(--color-muted-purple);
 }
 
 #settingsButton:hover,
