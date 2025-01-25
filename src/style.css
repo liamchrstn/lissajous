@@ -388,7 +388,7 @@ footer a:hover {
 }
 
 #toggleSingleCurve.active {
-  transform: translateX(-50%) translateY(calc(50vmin + 2vmax));
+  transform: translateX(-50%);
 }
 
 #toggleSingleCurve:hover {
