@@ -258,12 +258,12 @@
 }
 
 .input-group.time-disabled {
-  opacity: 0.5;
   pointer-events: none;
 }
 
 .input-group.time-disabled input,
-.input-group.time-disabled button:not(#toggleTime) {
+.input-group.time-disabled button:not(#toggleTime),
+.input-group.time-disabled label {
   cursor: not-allowed;
   opacity: 0.5;
 }
