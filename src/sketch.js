@@ -6,6 +6,9 @@ let angle = 0; // Current angle for animation
 const cols = 5; // Number of columns
 const rows = 5; // Array to store curve points
 const curves = [];
+let showGeneratorLines = false; // Changed default to false
+let speed = 0.03; // Add this line
+let isPaused = false; // Add this line
 
 function setup() {
   // Create canvas that fits in the app div
@@ -29,6 +32,10 @@ function setup() {
   // Set drawing properties
   stroke(getCSSVar('--color-muted-purple'));
   noFill();
+
+  // Update button text on initial load
+  const button = document.getElementById('toggleLines');
+  button.textContent = showGeneratorLines ? 'Hide Generator Lines' : 'Show Generator Lines';
 }
 
 function draw() {
@@ -86,15 +93,25 @@ function draw() {
       const y = margin + h * (j + 0.5) + sin(angle * (j + 1)) * (r * 0.8);
       
       // Draw guide lines from generators using stored points
-      stroke(getCSSVar('--color-muted-purple'));
-      strokeWeight(0.5);
-      line(horizontalPoints[i].x, horizontalPoints[i].y, x, y);
-      line(verticalPoints[j].x, verticalPoints[j].y, x, y);
+      if (showGeneratorLines) {
+        stroke(getCSSVar('--color-muted-purple'));
+        strokeWeight(0.5);
+        line(horizontalPoints[i].x, horizontalPoints[i].y, x, y);
+        line(verticalPoints[j].x, verticalPoints[j].y, x, y);
+      }
       
-      curves[i][j].push(createVector(x, y));
-      
-      if (curves[i][j].length > 100) {
-        curves[i][j].shift();
+      if (!isPaused) {
+        curves[i][j].push(createVector(x, y));
+        if (curves[i][j].length > 100) {
+          curves[i][j].shift();
+        }
+      } else if (curves[i][j].length !== 360) {
+        curves[i][j] = [];
+        for (let angle = 0; angle < TWO_PI; angle += TWO_PI/360) {
+          const x = margin + w * (i + 0.5) + cos((i + 1) * angle) * (r * 0.8);
+          const y = margin + h * (j + 0.5) + sin((j + 1) * angle) * (r * 0.8);
+          curves[i][j].push(createVector(x, y));
+        }
       }
       
       // Draw curve with fade effect
@@ -102,7 +119,7 @@ function draw() {
       for (let k = 0; k < curves[i][j].length - 1; k++) {
         const alpha = map(k, 0, curves[i][j].length - 1, 0, 255);
         stroke(color(getCSSVar('--color-olive') + hex(floor(alpha), 2)));
-        strokeWeight(1.5);
+        strokeWeight(2);
         line(
           curves[i][j][k].x, 
           curves[i][j][k].y, 
@@ -113,7 +130,7 @@ function draw() {
     }
   }
 
-  angle += 0.03;
+  angle += isPaused ? 0 : speed; // Modified this line
 }
 
 // Handle window resize
@@ -128,6 +145,35 @@ function windowResized() {
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       curves[i][j] = [];
+    }
+  }
+}
+
+// Add this function
+window.toggleGeneratorLines = function() {
+  showGeneratorLines = !showGeneratorLines;
+  const button = document.getElementById('toggleLines');
+  button.textContent = showGeneratorLines ? 'Hide Generator Lines' : 'Show Generator Lines';
+}
+
+// Add this function
+window.updateSpeed = function(value) {
+  speed = parseFloat(value);
+  document.getElementById('speedValue').textContent = value;
+}
+
+// Add this function
+window.togglePause = function() {
+  isPaused = !isPaused;
+  const button = document.getElementById('pauseButton');
+  button.innerHTML = isPaused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
+  
+  if (!isPaused) {
+    // Clear curves when resuming
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        curves[i][j] = [];
+      }
     }
   }
 }

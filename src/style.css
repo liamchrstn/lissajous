@@ -68,14 +68,110 @@ header p {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0;
-  min-height: 600px;
+  min-height: 100vmin;
   position: relative;
   z-index: 2;
 }
 
 #app canvas {
   max-height: 100%;
+}
+
+.controls {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  align-items: center;
+  justify-content: center;
+  margin: 1vw 0;
+}
+
+.speed-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1vw;
+}
+
+.speed-control label {
+  color: var(--color-lavender);
+  font-size: 3vmin;
+}
+
+.speed-control input {
+  width: 20vmin;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 0.5rem;
+  background: var(--color-dark-gray);
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Thumb styles */
+.speed-control input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background: var(--color-muted-purple);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  transform: translateY(-0.25rem); /* Center thumb on track */
+}
+
+.speed-control input::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background: var(--color-muted-purple);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  transform: translateY(-0.25rem); /* Center thumb on track */
+}
+
+/* Track styles */
+.speed-control input::-webkit-slider-runnable-track {
+  background: var(--color-dark-gray);
+  border-radius: 4px;
+  height: 0.5rem;
+}
+
+.speed-control input::-moz-range-track {
+  background: var(--color-dark-gray);
+  border-radius: 4px;
+  height: 0.5rem;
+}
+
+/* Hover effects */
+.speed-control input:hover::-webkit-slider-thumb {
+  background: var(--color-olive);
+}
+
+speed-control input:hover::-moz-range-thumb {
+  background: var(--color-olive);
+}
+
+#toggleLines,
+#pauseButton {
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-family: 'Arimo', system-ui, -apple-system, sans-serif;
+  font-size: 3vmin;
+  background-color: var(--color-muted-purple);
+  color: var(--color-darker-gray);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+#toggleLines:hover,
+#pauseButton:hover {
+  opacity: 0.8;
 }
 
 footer {
