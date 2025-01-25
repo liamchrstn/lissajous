@@ -38,7 +38,7 @@ let singleSketch = function(p) {
         }
     };
 
-    const setupParamCycling = (paramId, paramName, step = 0.1) => {
+    const setupParamCycling = (paramId, paramName, step = 0.01) => {
         if (paramId === 'ampX' || paramId === 'ampY') return; // Skip amplitude controls
 
         const input = document.getElementById(paramId);
@@ -95,7 +95,7 @@ let singleSketch = function(p) {
         document.getElementById('ampY').value = params.ampY;
         document.getElementById('freqX').value = params.freqX;
         document.getElementById('freqY').value = params.freqY;
-        document.getElementById('phase').value = params.phase / p.PI;
+        document.getElementById('phase').value = params.phase / p.PI;  // Convert to multiples of π for display
         document.getElementById('time').value = params.time;
 
         generatePoints();
@@ -106,7 +106,7 @@ let singleSketch = function(p) {
         params.ampY = parseFloat(document.getElementById('ampY').value);
         params.freqX = parseFloat(document.getElementById('freqX').value);
         params.freqY = parseFloat(document.getElementById('freqY').value);
-        params.phase = parseFloat(document.getElementById('phase').value) * p.PI;
+        params.phase = parseFloat(document.getElementById('phase').value) * p.PI;  // Convert from multiples of π to radians
         params.time = parseFloat(document.getElementById('time').value);
         
         generatePoints();
@@ -132,7 +132,7 @@ let singleSketch = function(p) {
         if (!lockedParams.ampY) params.ampY = parseFloat(p.random(0.1, 1).toFixed(1));
         if (!lockedParams.freqX) params.freqX = parseFloat(p.random(1, 10).toFixed(1));
         if (!lockedParams.freqY) params.freqY = parseFloat(p.random(1, 10).toFixed(1));
-        if (!lockedParams.phase) params.phase = parseFloat((p.random(0, 2)).toFixed(1));
+        if (!lockedParams.phase) params.phase = p.random(0, 2) * p.PI;  // Random phase in radians
         params.time = 0;
 
         // Update input values
@@ -140,7 +140,7 @@ let singleSketch = function(p) {
         document.getElementById('ampY').value = params.ampY;
         document.getElementById('freqX').value = params.freqX;
         document.getElementById('freqY').value = params.freqY;
-        document.getElementById('phase').value = params.phase;
+        document.getElementById('phase').value = (params.phase / p.PI).toFixed(1);  // Convert to multiples of π for display
         document.getElementById('time').value = params.time;
 
         generatePoints();
@@ -152,8 +152,8 @@ let singleSketch = function(p) {
         generatePoints();
         
         // Setup cycling controls (excluding amplitudes)
-        setupParamCycling('freqX', 'FreqX');
-        setupParamCycling('freqY', 'FreqY');
+        setupParamCycling('freqX', 'FreqX', 0.05);
+        setupParamCycling('freqY', 'FreqY', 0.05);
         setupParamCycling('phase', 'Phase');
         setupParamCycling('time', 'Time', 0.05);
 
