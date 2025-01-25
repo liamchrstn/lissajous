@@ -310,10 +310,17 @@ speed-control input:hover::-moz-range-thumb {
 }
 
 #single-curve {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
+  width: 50vmin;
+  height: 50vmin;
+}
+
+#single-curve canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 footer {
