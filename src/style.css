@@ -232,6 +232,33 @@ speed-control input:hover::-moz-range-thumb {
   opacity: 1;
 }
 
+/* Replace existing tooltip styles with these */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem;
+  background: var(--color-dark-gray);
+  color: var(--color-lavender);
+  font-size: 1.5vmin;
+  font-family: 'Arimo', system-ui, -apple-system, sans-serif; /* Add this line */
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Fix tooltip position for range input */
+.speed-control input[data-tooltip]:hover::after {
+  bottom: 150%;
+}
+
 footer {
   position: relative;
   z-index: 1;
