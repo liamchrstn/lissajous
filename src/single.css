@@ -32,7 +32,6 @@
   font-style: italic;
 }
 
-
 .collapsible-section p {
   color: var(--color-lavender);
   text-align: left;
@@ -152,14 +151,17 @@
 }
 
 .input-group input[type="number"] {
-  width: 8vmax;
-  padding: 0.5vmax;
+  width: 4vmax;
+  height: 4vmax;
+  padding: 0;
   font-size: 1.5vmax;
   color: var(--color-lavender);
   background: var(--color-bg-secondary);
   border: 2px solid var(--color-muted-purple);
   border-radius: 0.5vmax;
   outline: none;
+  text-align: center;
+  -moz-appearance: textfield;
 }
 
 .input-group input[type="number"]:focus {
@@ -168,8 +170,8 @@
 
 .input-group input[type="number"]::-webkit-inner-spin-button,
 .input-group input[type="number"]::-webkit-outer-spin-button {
-  opacity: 1;
-  height: 2vmax;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .play-btn {
