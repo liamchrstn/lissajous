@@ -29,25 +29,6 @@
   font-size: 2.5vmax;
   color: var(--color-muted-purple);
 }
-
-/* Remove general <mi> selectors to prevent unintended coloring */
-/* .equations math mi:first-of-type,
-.equation-explanation .variable-a { color: var(--var-color-a); }
-
-.equations math mi[mathvariant="normal"]:first-of-type,
-.equation-explanation .variable-b { color: var(--var-color-b); }
-
-.equations math mi:nth-of-type(2),
-.equations math mi:nth-of-type(3),
-.equation-explanation .variable-freq { color: var(--var-color-freq); }
-
-.equations math mi[mathvariant="italic"]:last-of-type,
-.equation-explanation .variable-time { color: var(--var-color-time); }
-
-.equations math mi[mathvariant="normal"]:last-of-type,
-.equation-explanation .variable-delta { color: var(--var-color-delta); } */
-
-/* Add specific classes for variables */
 .equations math .variable-a,
 .equation-explanation .variable-a {
   color: var(--var-color-a);
