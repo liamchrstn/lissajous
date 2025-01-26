@@ -2,7 +2,7 @@ const getCSSVar = (name) => getComputedStyle(document.documentElement).getProper
 
 let singleSketch = function(p) {
     let points = [];
-    let timeEnabled = true;
+    let timeEnabled = false;
     const lockedParams = {
         ampX: true,
         ampY: true,
