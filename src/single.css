@@ -4,8 +4,8 @@
   --var-color-cap-b: #ff9f43;   /* Orange */
   --var-color-cap-a: #3498db;   /* Blue */
   --var-color-freq: #00ff11;    /* Green */
-  --var-color-time: #f1c40f;    /* Yellow */
-  --var-color-delta: #9b59b6;   /* Purple */
+  --var-color-time: #9b59b6;   /* Purple */
+  --var-color-delta:#f1c40f;  /* Yellow */
 }
 
 .collapsible-section {
@@ -201,10 +201,34 @@
 }
 
 .input-group label {
-  color: var(--color-lavender);
   font-size: 1.5vmax;
   min-width: 4vmax;
   padding-left: 0.5vmax;
+}
+
+/* Control label colors */
+.input-group label.variable-a {
+  color: var(--var-color-a);
+}
+
+.input-group label.variable-b {
+  color: var(--var-color-b);
+}
+
+.input-group label.freq-a {
+  color: var(--var-color-cap-a);
+}
+
+.input-group label.freq-b {
+  color: var(--var-color-cap-b);
+}
+
+.input-group label.variable-time {
+  color: var(--var-color-time);
+}
+
+.input-group label.variable-delta {
+  color: var(--var-color-delta);
 }
 
 .input-group input[type="number"] {

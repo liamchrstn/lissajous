@@ -69,14 +69,14 @@
           </div>
           <div class="controls-row">
             <div class="input-group">
-              <label>A:</label>
+              <label class="variable-a">A:</label>
               <input type="number" id="ampX" min="0.1" max="1" value="1" step="0.1">
               <button id="lockAmpX" class="lock-btn" data-tooltip="Lock Value">
                 <i class="nf nf-fa-unlock"></i>
               </button>
             </div>
             <div class="input-group">
-              <label>B:</label>
+              <label class="variable-b">B:</label>
               <input type="number" id="ampY" min="0.1" max="1" value="1" step="0.1">
               <button id="lockAmpY" class="lock-btn" data-tooltip="Lock Value">
                 <i class="nf nf-fa-unlock"></i>
@@ -85,7 +85,7 @@
           </div>
           <div class="controls-row">
             <div class="input-group with-play">
-              <label>a:</label>
+              <label class="freq-a">a:</label>
               <input type="number" id="freqX" min="0" max="10" value="3" step="0.1">
               <button id="lockFreqX" class="lock-btn" data-tooltip="Lock Value">
                 <i class="nf nf-fa-unlock"></i>
@@ -95,7 +95,7 @@
               </button>
             </div>
             <div class="input-group with-play">
-              <label>b:</label>
+              <label class="freq-b">b:</label>
               <input type="number" id="freqY" min="0" max="10" value="2" step="0.1">
               <button id="lockFreqY" class="lock-btn" data-tooltip="Lock Value">
                 <i class="nf nf-fa-unlock"></i>
@@ -107,7 +107,7 @@
           </div>
           <div class="controls-row">
             <div class="input-group with-play">
-                <label data-tooltip="(π rad)">δ:</label>
+                <label class="variable-delta" data-tooltip="(π rad)">δ:</label>
               <input type="number" id="phase" min="0" max="2" value="0.5" step="0.1">
               <button id="lockPhase" class="lock-btn" data-tooltip="Lock Value">
                 <i class="nf nf-fa-unlock"></i>
@@ -117,7 +117,7 @@
               </button>
             </div>
             <div class="input-group with-play">
-              <label>t:</label>
+              <label class="variable-time">t:</label>
               <input type="number" id="time" min="0" max="6.28" value="0" step="0.01">
               <button id="playPauseTime" class="play-btn">
                 <i class="nf nf-fa-play"></i>
