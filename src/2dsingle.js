@@ -4,19 +4,19 @@ let singleSketch = function(p) {
     let points = [];
     let timeEnabled = true;
     const lockedParams = {
-        ampX: false,
-        ampY: false,
+        ampX: true,
+        ampY: true,
         freqX: false,
         freqY: false,
-        phase: false
+        phase: true
     };
     
     const defaultParams = {
         freqX: 3,
-        freqY: 2,
+        freqY: 7.5,
         ampX: 1,
         ampY: 1,
-        phase: p.PI / 2,
+        phase: p.PI,
         time: 0
     };
     
@@ -166,9 +166,17 @@ let singleSketch = function(p) {
         document.getElementById('randomizeParams').addEventListener('click', randomizeParams);
         document.getElementById('resetParams').addEventListener('click', resetParams);
 
-        // Add lock button listeners
+        // Add lock button listeners and set initial state
         Object.keys(lockedParams).forEach(paramId => {
-            document.getElementById(`lock${paramId.charAt(0).toUpperCase() + paramId.slice(1)}`).addEventListener('click', (e) => {
+            const lockBtn = document.getElementById(`lock${paramId.charAt(0).toUpperCase() + paramId.slice(1)}`);
+            // Set initial state
+            if (lockedParams[paramId]) {
+                lockBtn.classList.add('locked');
+                lockBtn.querySelector('i').classList.remove('nf-fa-unlock');
+                lockBtn.querySelector('i').classList.add('nf-fa-lock');
+            }
+            // Add click listener
+            lockBtn.addEventListener('click', (e) => {
                 lockedParams[paramId] = !lockedParams[paramId];
                 e.currentTarget.classList.toggle('locked');
                 e.currentTarget.querySelector('i').classList.toggle('nf-fa-unlock');
