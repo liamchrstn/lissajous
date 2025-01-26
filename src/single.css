@@ -1,3 +1,13 @@
+:root {
+  --var-color-a: #ff6b6b;       /* Red */
+  --var-color-b: #4ecdc4;       /* Blue */
+  --var-color-cap-b: #ff9f43;   /* Orange */
+  --var-color-cap-a: #3498db;   /* Blue */
+  --var-color-freq: #00ff11;    /* Green */
+  --var-color-time: #f1c40f;    /* Yellow */
+  --var-color-delta: #9b59b6;   /* Purple */
+}
+
 .collapsible-section {
   margin: 2vmax auto;
   max-width: 110vmin;
@@ -20,6 +30,54 @@
   color: var(--color-muted-purple);
 }
 
+/* Remove general <mi> selectors to prevent unintended coloring */
+/* .equations math mi:first-of-type,
+.equation-explanation .variable-a { color: var(--var-color-a); }
+
+.equations math mi[mathvariant="normal"]:first-of-type,
+.equation-explanation .variable-b { color: var(--var-color-b); }
+
+.equations math mi:nth-of-type(2),
+.equations math mi:nth-of-type(3),
+.equation-explanation .variable-freq { color: var(--var-color-freq); }
+
+.equations math mi[mathvariant="italic"]:last-of-type,
+.equation-explanation .variable-time { color: var(--var-color-time); }
+
+.equations math mi[mathvariant="normal"]:last-of-type,
+.equation-explanation .variable-delta { color: var(--var-color-delta); } */
+
+/* Add specific classes for variables */
+.equations math .variable-a,
+.equation-explanation .variable-a {
+  color: var(--var-color-a);
+}
+
+.equations math .variable-b,
+.equation-explanation .variable-b {
+  color: var(--var-color-b);
+}
+
+.equations math .freq-a,
+.equation-explanation .freq-a {
+  color: var(--var-color-cap-a);
+}
+
+.equations math .freq-b,
+.equation-explanation .freq-b {
+  color: var(--var-color-cap-b);
+}
+
+.equations math .variable-time,
+.equation-explanation .variable-time {
+  color: var(--var-color-time);
+}
+
+.equations math .variable-delta,
+.equation-explanation .variable-delta {
+  color: var(--var-color-delta);
+}
+
 .equation-explanation {
   text-align: center;
   font-size: 1.8vmax;
@@ -27,8 +85,7 @@
   opacity: 0.9;
 }
 
-.equation-explanation .variable {
-  color: var(--color-muted-purple);
+.equation-explanation span {
   font-style: italic;
 }
 
