@@ -2,7 +2,10 @@
 
 An interactive experiment visualizing Lissajous curves with p5.js.
 
+![demo-lissajous-hq](https://github.com/user-attachments/assets/8c908fac-5ba0-4c9a-b83f-81d0359c7666)
+
 ## Live Demo
+
 
 [View the live demo here](https://liamchristian.com/experiments/lissajous/).
 
